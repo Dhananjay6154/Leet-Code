@@ -11,28 +11,56 @@
 class Solution {
 public:
     bool isPalindrome(ListNode* head) {
-        vector<int> ans;
-        ListNode* temp = head;
-        while(temp != NULL)
+
+// Without Extra Space
+        if(head->next == NULL)
         {
-            ans.push_back(temp->val);
+            return 1;
+        }
+        int count = 0;
+        ListNode* temp = head;
+        while(temp)
+        {
+            count++;
             temp = temp->next;
         }
-        int left = 0;
-        int right = ans.size()-1;
-        while(left < right)
+        count /= 2;
+
+        ListNode* prev = NULL;
+        ListNode* curr = head;
+        while(count--)
         {
-            if(ans[left] == ans[right])
+            prev = curr;
+            curr = curr->next;
+        }
+        prev->next = NULL;
+        // Reverse the second Linked List, curr is pointing it 
+        ListNode* front;
+        prev = NULL;
+        while(curr)
+        {
+            front = curr->next;
+            curr->next = prev;
+            prev = curr;
+            curr = front;
+        } 
+        ListNode* head1 = head;
+        ListNode* head2 = prev;
+        while(head1)
+        {
+            if(head1->val != head2->val)
             {
-                left++;
-                right--;
+
+                return 0;
             }
-            else{
-                return false;
-            }
+            head1 = head1->next;
+            head2 = head2->next;
 
         }
-        return true;
+        return 1;
         
+
+
+
     }
 };
