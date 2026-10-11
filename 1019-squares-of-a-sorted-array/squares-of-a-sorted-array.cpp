@@ -1,7 +1,7 @@
 class Solution {
 public:
     vector<int> sortedSquares(vector<int>& nums) {
-        vector<int> ans;
+        vector<int> ans((nums.size()));
         int s = 0;
         int e = nums.size()-1;
         int i = nums.size()-1;
@@ -13,15 +13,15 @@ public:
 
             if(startSq > endSq)
             {
-                ans.push_back(startSq);
+                ans[i] = startSq;
                 s++;
             }
             else{
-                ans.push_back(endSq);
+                ans[i] = endSq;
                 e--;
             }
+            i--;
         }
-        sort(ans.begin(),ans.end());
         return ans;
     }
 };
